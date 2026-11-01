@@ -1,130 +1,185 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
 <title>Bibliothèque de classe</title>
 
-<link rel="manifest" href="manifest.json">
+<link rel="manifest"
+      href="manifest.json">
 
-<meta name="theme-color" content="#2563eb">
+<meta name="theme-color"
+      content="#2563eb">
 
 <style>
 
 :root{
-  --primary:#2563eb;
-  --success:#16a34a;
-  --danger:#dc2626;
-  --bg:#f5f7fb;
+
+    --primary:#2563eb;
+    --success:#16a34a;
+    --danger:#dc2626;
+    --warning:#f59e0b;
+    --bg:#f5f7fb;
+
 }
 
 *{
-  box-sizing:border-box;
-  font-family:Segoe UI,Arial,sans-serif;
+
+    box-sizing:border-box;
+    font-family:Segoe UI,Arial,sans-serif;
+
 }
 
 body{
-  margin:0;
-  background:var(--bg);
+
+    margin:0;
+    background:var(--bg);
+
 }
 
 header{
-  background:#2563eb;
-  color:white;
-  padding:20px;
+
+    background:#2563eb;
+    color:white;
+    padding:20px;
+
 }
 
 .container{
-  max-width:1200px;
-  margin:auto;
-  padding:20px;
+
+    max-width:1400px;
+    margin:auto;
+    padding:20px;
+
 }
 
 .card{
-  background:white;
-  padding:16px;
-  border-radius:12px;
-  margin-bottom:20px;
-  box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+    background:white;
+    padding:16px;
+    border-radius:12px;
+    margin-bottom:20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+
 }
 
 .grid{
-  display:grid;
-  gap:20px;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+    display:grid;
+    gap:20px;
+    grid-template-columns:
+    repeat(auto-fit,minmax(280px,1fr));
+
 }
 
 input,
 select,
 textarea{
-  width:100%;
-  padding:10px;
-  margin:6px 0 10px 0;
+
+    width:100%;
+    padding:10px;
+    margin-top:6px;
+    margin-bottom:10px;
+
 }
 
 button{
-  border:none;
-  border-radius:8px;
-  padding:10px 14px;
-  cursor:pointer;
-  font-weight:bold;
+
+    border:none;
+    border-radius:8px;
+    padding:10px 14px;
+    cursor:pointer;
+    margin:2px;
+
 }
 
 .primary{
-  background:var(--primary);
-  color:white;
+
+    background:var(--primary);
+    color:white;
+
 }
 
 .success{
-  background:var(--success);
-  color:white;
+
+    background:var(--success);
+    color:white;
+
 }
 
 .danger{
-  background:var(--danger);
-  color:white;
+
+    background:var(--danger);
+    color:white;
+
+}
+
+.warning{
+
+    background:var(--warning);
+    color:white;
+
 }
 
 table{
-  width:100%;
-  border-collapse:collapse;
+
+    width:100%;
+    border-collapse:collapse;
+
 }
 
-th,td{
-  padding:10px;
-  border-bottom:1px solid #ddd;
-}
+th,
+td{
 
-.stat{
-  text-align:center;
+    padding:10px;
+    border-bottom:1px solid #ddd;
+
 }
 
 .badge{
-  padding:4px 10px;
-  border-radius:999px;
-  background:#e5e7eb;
+
+    background:#e5e7eb;
+    padding:4px 10px;
+    border-radius:999px;
+
 }
 
 .comment{
-  margin-top:10px;
-  padding:10px;
-  background:#f3f4f6;
-  border-radius:8px;
+
+    background:#f3f4f6;
+    border-radius:8px;
+    padding:10px;
+    margin-top:10px;
+
 }
 
-footer{
-  text-align:center;
-  padding:20px;
-  color:#666;
+.stat{
+
+    text-align:center;
+
+}
+
+.stat h1{
+
+    margin:0;
+
 }
 
 </style>
+
 </head>
+
 <body>
 
 <header>
+
 <h1>📚 Bibliothèque de classe</h1>
+
 </header>
 
 <div class="container">
@@ -132,44 +187,47 @@ footer{
 <div class="grid">
 
 <div class="card stat">
-<h3>Livres</h3>
+
+<h3>Total livres</h3>
+
 <h1 id="statLivres">0</h1>
+
 </div>
 
 <div class="card stat">
-<h3>Emprunts</h3>
+
+<h3>Emprunts actifs</h3>
+
 <h1 id="statEmprunts">0</h1>
+
 </div>
 
 <div class="card stat">
-<h3>Disponibles</h3>
+
+<h3>Livres disponibles</h3>
+
 <h1 id="statDisponibles">0</h1>
-</div>
 
 </div>
 
+</div>
 <div class="card">
 
 <h2>Utilisateur</h2>
 
 <input
 id="userName"
-placeholder="Nom">
+placeholder="Nom de l'enseignant">
 
 <button
 class="primary"
 onclick="connexion()">
+
 Connexion
+
 </button>
 
 <p id="currentUser"></p>
-
-<button
-id="installBtn"
-class="success"
-style="display:none">
-Installer l'application
-</button>
 
 </div>
 
@@ -179,23 +237,32 @@ Installer l'application
 
 <h2>Ajouter un livre</h2>
 
-<input id="livreTitre" placeholder="Titre">
+<input id="livreTitre"
+       placeholder="Titre">
 
-<input id="livreAuteur" placeholder="Auteur">
+<input id="livreAuteur"
+       placeholder="Auteur">
+
+<input id="livreIllustrateur"
+       placeholder="Illustrateur">
 
 <select id="livreGenre">
+
 <option value="Roman">Roman</option>
 <option value="BD">BD</option>
 <option value="Documentaire">Documentaire</option>
 <option value="Magazine">Magazine</option>
 <option value="Conte">Conte</option>
 <option value="Autre">Autre</option>
+
 </select>
 
 <button
 class="success"
 onclick="ajouterLivre()">
+
 Ajouter
+
 </button>
 
 </div>
@@ -206,12 +273,14 @@ Ajouter
 
 <input
 id="eleveNom"
-placeholder="Nom">
+placeholder="Nom de l'élève">
 
 <button
 class="success"
 onclick="ajouterEleve()">
+
 Ajouter
+
 </button>
 
 </div>
@@ -224,14 +293,14 @@ Ajouter
 
 <input
 id="rechercheLivre"
-placeholder="Rechercher..."
+placeholder="Recherche..."
 oninput="render()">
 
 <select
 id="filtreDisponibilite"
 onchange="render()">
 
-<option value="tous">Tous les livres</option>
+<option value="tous">Tous</option>
 <option value="disponible">Disponibles</option>
 <option value="emprunte">Empruntés</option>
 
@@ -254,7 +323,9 @@ onchange="render()">
 <button
 class="danger"
 onclick="reinitialiserFiltres()">
-✖ Réinitialiser les filtres
+
+Réinitialiser
+
 </button>
 
 <p id="compteurLivres"></p>
@@ -268,26 +339,70 @@ onclick="reinitialiserFiltres()">
 <table>
 
 <thead>
+
 <tr>
+
 <th>Titre</th>
 <th>Auteur</th>
+<th>Illustrateur</th>
 <th>Genre</th>
 <th>Statut</th>
-<th>Action</th>
+<th>Actions</th>
+
 </tr>
+
 </thead>
 
-<tbody id="livresTable"></tbody>
+<tbody id="livresTable">
+
+</tbody>
 
 </table>
+
+</div>
+<div class="card">
+
+<h2>📖 Fiche du livre</h2>
+
+<div id="ficheLivre">
+
+Sélectionnez un livre.
+
+</div>
 
 </div>
 
 <div class="card">
 
-<h2>Élèves</h2>
+<h2>📋 Emprunter un livre</h2>
 
-<ul id="elevesListe"></ul>
+<select id="eleveEmprunteur">
+
+</select>
+
+</div>
+
+<div class="card">
+
+<h2>📚 Emprunts en cours</h2>
+
+<div id="listeEmprunts">
+
+Aucun emprunt.
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>🕒 Historique des emprunts</h2>
+
+<div id="historiqueEmprunts">
+
+Aucun historique.
+
+</div>
 
 </div>
 
@@ -300,12 +415,16 @@ onclick="reinitialiserFiltres()">
 <textarea
 id="commentTexte"
 rows="4"
-placeholder="Commentaire"></textarea>
+placeholder="Commentaire">
+
+</textarea>
 
 <button
 class="primary"
 onclick="ajouterCommentaire()">
+
 Ajouter
+
 </button>
 
 <div id="commentaires"></div>
@@ -314,626 +433,899 @@ Ajouter
 
 <div class="card">
 
-<h2>Sauvegarde</h2>
+<h2>Élèves</h2>
 
-<button
-class="primary"
-onclick="exporter()">
-Exporter JSON
-</button>
-
-<input
-type="file"
-id="importFile">
-
-<button
-class="success"
-onclick="importer()">
-Importer JSON
-</button>
+<ul id="elevesListe"></ul>
 
 </div>
-
-</div>
-
-<footer>
-Bibliothèque de classe PWA
-</footer>
-
 <script>
 
-const STORAGE_KEY = "bibliotheque_classe_v1";
+const STORAGE_KEY = "bibliotheque_v1";
+
+let livreSelectionne = null;
+
+/* =========================
+   DONNÉES
+========================= */
 
 function getData(){
 
-return JSON.parse(
-localStorage.getItem(STORAGE_KEY) ||
-JSON.stringify({
-livres:[],
-eleves:[],
-emprunts:[],
-commentaires:[]
-})
-);
+  return JSON.parse(
+    localStorage.getItem(STORAGE_KEY)
+    ||
+    JSON.stringify({
+      livres:[],
+      eleves:[],
+      emprunts:[],
+      historique:[],
+      commentaires:[]
+    })
+  );
 
 }
 
 function saveData(data){
-localStorage.setItem(
-STORAGE_KEY,
-JSON.stringify(data)
-);
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(data)
+  );
+
 }
 
+/* =========================
+   UTILISATEUR
+========================= */
+
 function utilisateur(){
-return localStorage.getItem("utilisateur") || "";
+
+  return localStorage.getItem(
+    "utilisateur"
+  ) || "";
+
 }
 
 function connexion(){
 
-const nom =
-document.getElementById("userName")
-.value
-.trim();
+  const nom =
+    document.getElementById(
+      "userName"
+    ).value.trim();
 
-if(!nom) return;
+  if(!nom) return;
 
-localStorage.setItem(
-"utilisateur",
-nom
-);
+  localStorage.setItem(
+    "utilisateur",
+    nom
+  );
 
-render();
+  render();
 
 }
+
+/* =========================
+   LIVRES
+========================= */
 
 function ajouterLivre(){
 
-const titre =
-document.getElementById("livreTitre")
-.value.trim();
+  const titre =
+    document.getElementById(
+      "livreTitre"
+    ).value.trim();
 
-if(!titre) return;
+  if(!titre) return;
 
-const auteur =
-document.getElementById("livreAuteur")
-.value.trim();
+  const data = getData();
 
-const genre =
-document.getElementById("livreGenre")
-.value;
+  data.livres.push({
 
-const data = getData();
+    id:Date.now(),
 
-data.livres.push({
-    id: Date.now(),
     titre,
-    auteur,
-    genre,
-    resume: "",
-    note: 0,
-    disponible: true
-});
 
-saveData(data);
+    auteur:
+    document.getElementById(
+      "livreAuteur"
+    ).value.trim(),
 
-document.getElementById("livreTitre").value="";
-document.getElementById("livreAuteur").value="";
+    illustrateur:
+    document.getElementById(
+      "livreIllustrateur"
+    ).value.trim(),
 
-render();
+    genre:
+    document.getElementById(
+      "livreGenre"
+    ).value,
 
-}
+    resume:"",
 
-function ajouterEleve(){
+    disponible:true
 
-const nom =
-document.getElementById("eleveNom")
-.value.trim();
+  });
 
-if(!nom) return;
+  saveData(data);
 
-const data=getData();
+  document.getElementById("livreTitre").value="";
+  document.getElementById("livreAuteur").value="";
+  document.getElementById("livreIllustrateur").value="";
 
-data.eleves.push({
-id:Date.now(),
-nom
-});
-
-saveData(data);
-
-document.getElementById("eleveNom").value="";
-
-render();
+  render();
 
 }
 
-function emprunter(id){
+function modifierLivre(id){
 
-if(!utilisateur()){
-alert("Connectez-vous d'abord.");
-return;
-}
+  const data = getData();
 
-const data=getData();
+  const livre =
+    data.livres.find(
+      l => l.id === id
+    );
 
-const livre =
-data.livres.find(
-l => l.id === id
-);
+  if(!livre) return;
 
-livre.disponible = false;
+  livre.titre =
+    prompt(
+      "Titre",
+      livre.titre
+    ) || livre.titre;
 
-data.emprunts.push({
-livreId:id,
-nom:utilisateur(),
-date:new Date().toLocaleDateString()
-});
+  livre.auteur =
+    prompt(
+      "Auteur",
+      livre.auteur
+    ) || livre.auteur;
 
-saveData(data);
+  livre.illustrateur =
+    prompt(
+      "Illustrateur",
+      livre.illustrateur || ""
+    ) || livre.illustrateur;
 
-render();
+  livre.genre =
+    prompt(
+      "Genre",
+      livre.genre
+    ) || livre.genre;
 
-}
+  saveData(data);
 
-function retourner(id){
-
-const data=getData();
-
-const livre =
-data.livres.find(
-l => l.id === id
-);
-
-livre.disponible=true;
-
-data.emprunts =
-data.emprunts.filter(
-e => e.livreId !== id
-);
-
-saveData(data);
-
-render();
+  render();
 
 }
 
 function supprimerLivre(id){
 
-    if(!confirm(
-        "Supprimer ce livre ?"
-    )){
-        return;
-    }
+  if(
+    !confirm(
+      "Supprimer ce livre ?"
+    )
+  ){
+    return;
+  }
 
-    const data = getData();
+  const data = getData();
 
-    data.livres =
-        data.livres.filter(
-            l => l.id !== id
-        );
+  data.livres =
+    data.livres.filter(
+      l => l.id !== id
+    );
 
-    data.commentaires =
-        data.commentaires.filter(
-            c => c.livreId !== id
-        );
+  data.commentaires =
+    data.commentaires.filter(
+      c => c.livreId !== id
+    );
 
-    saveData(data);
+  data.emprunts =
+    data.emprunts.filter(
+      e => e.livreId !== id
+    );
 
-    render();
+  saveData(data);
+
+  if(livreSelectionne === id){
+    livreSelectionne = null;
+  }
+
+  render();
+
 }
 
-function modifierLivre(id){
+/* =========================
+   ÉLÈVES
+========================= */
 
-    const data = getData();
+function ajouterEleve(){
 
-    const livre =
-        data.livres.find(
-            l => l.id === id
-        );
+  const nom =
+    document.getElementById(
+      "eleveNom"
+    ).value.trim();
 
-    const nouveauTitre =
-        prompt(
-            "Titre",
-            livre.titre
-        );
+  if(!nom) return;
 
-    if(!nouveauTitre) return;
+  const data = getData();
 
-    const nouvelAuteur =
-        prompt(
-            "Auteur",
-            livre.auteur
-        );
+  data.eleves.push({
 
-    livre.titre = nouveauTitre;
-    livre.auteur = nouvelAuteur;
-    livre.illustrateur = nouvelIllustrateur;
+    id:Date.now(),
+    nom
 
-    saveData(data);
+  });
 
-    render();
+  saveData(data);
+
+  document.getElementById(
+    "eleveNom"
+  ).value="";
+
+  render();
+
 }
 
-<div class="card">
+/* =========================
+   EMPRUNTS
+========================= */
 
-<h2>📖 Fiche du livre</h2>
+function emprunter(id){
 
-<div id="ficheLivre">
+  const data = getData();
 
-Sélectionnez un livre.
+  const livre =
+    data.livres.find(
+      l => l.id === id
+    );
 
-</div>
+  if(!livre || !livre.disponible){
+    return;
+  }
 
-</div>
-let livreSelectionne = null;
+  const nomEleve =
+    document.getElementById(
+      "eleveEmprunteur"
+    ).value;
+
+  if(!nomEleve){
+
+    alert(
+      "Ajoutez ou choisissez un élève."
+    );
+
+    return;
+
+  }
+
+  livre.disponible = false;
+
+  data.emprunts.push({
+
+    livreId:id,
+    utilisateur:nomEleve,
+    dateEmprunt:new Date()
+      .toLocaleDateString()
+
+  });
+
+  data.historique.push({
+
+    action:"emprunt",
+    livreId:id,
+    utilisateur:nomEleve,
+    date:new Date()
+      .toLocaleString()
+
+  });
+
+  saveData(data);
+
+  render();
+
+}
+
+function retourner(id){
+
+  const data = getData();
+
+  const livre =
+    data.livres.find(
+      l => l.id === id
+    );
+
+  const emprunt =
+    data.emprunts.find(
+      e => e.livreId === id
+    );
+
+  if(!livre){
+    return;
+  }
+
+  livre.disponible = true;
+
+  if(emprunt){
+
+    data.historique.push({
+
+      action:"retour",
+      livreId:id,
+      utilisateur:
+      emprunt.utilisateur,
+      date:new Date()
+        .toLocaleString()
+
+    });
+
+  }
+
+  data.emprunts =
+    data.emprunts.filter(
+      e => e.livreId !== id
+    );
+
+  saveData(data);
+
+  render();
+
+}
+
+/* =========================
+   FICHE LIVRE
+========================= */
 
 function selectionnerLivre(id){
 
-    livreSelectionne = id;
+  livreSelectionne = id;
 
-    afficherFicheLivre();
+  afficherFicheLivre();
 
 }
-function afficherFicheLivre(){
 
-    if(!livreSelectionne){
-        return;
-    }
-
-    const data = getData();
-
-    const livre =
-        data.livres.find(
-            l => l.id === livreSelectionne
-        );
-
-    const commentaires =
-        data.commentaires.filter(
-            c => c.livreId === livreSelectionne
-        );
-
-    document.getElementById(
-        "ficheLivre"
-    ).innerHTML = `
-
-        <h3>${livre.titre}</h3>
-
-        <p>
-        <strong>Auteur :</strong>
-        ${livre.auteur}
-        </p>
-
-        <p>
-        <strong>Genre :</strong>
-        ${livre.genre}
-        </p>
-
-        <p>
-        <strong>Résumé :</strong>
-        </p>
-
-        <textarea
-            id="resumeLivre"
-            rows="7"
-        >${livre.resume || ""}</textarea>
-
-        <button
-            class="success"
-            onclick="sauverResume(${livre.id})">
-            Enregistrer le résumé
-        </button>
-
-        <hr>
-
-        <h4>Commentaires</h4>
-
-        ${commentaires.map(c => `
-            <div class="comment">
-                <strong>${c.auteur}</strong><br>
-                ${c.texte}
-            </div>
-        `).join("")}
-
-    `;
-}
 function sauverResume(id){
 
-    const data = getData();
+  const data = getData();
 
-    const livre =
-        data.livres.find(
-            l => l.id === id
-        );
+  const livre =
+    data.livres.find(
+      l => l.id === id
+    );
 
-    livre.resume =
-        document.getElementById(
-            "resumeLivre"
-        ).value;
+  if(!livre) return;
 
-    saveData(data);
+  livre.resume =
+    document.getElementById(
+      "resumeLivre"
+    ).value;
 
-    afficherFicheLivre();
+  saveData(data);
+
+  afficherFicheLivre();
 
 }
+
+function afficherFicheLivre(){
+
+  const data = getData();
+
+  const livre =
+    data.livres.find(
+      l => l.id === livreSelectionne
+    );
+
+  if(!livre){
+
+    document.getElementById(
+      "ficheLivre"
+    ).innerHTML =
+    "Sélectionnez un livre.";
+
+    return;
+
+  }
+
+  const commentaires =
+    data.commentaires.filter(
+      c => c.livreId === livre.id
+    );
+
+  document.getElementById(
+    "ficheLivre"
+  ).innerHTML = `
+
+    <h3>${livre.titre}</h3>
+
+    <p>
+    <strong>Auteur :</strong>
+    ${livre.auteur}
+    </p>
+
+    <p>
+    <strong>Illustrateur :</strong>
+    ${livre.illustrateur || ""}
+    </p>
+
+    <p>
+    <strong>Genre :</strong>
+    ${livre.genre}
+    </p>
+
+    <p>
+    <strong>Statut :</strong>
+    ${
+      livre.disponible
+      ? "Disponible"
+      : "Emprunté"
+    }
+    </p>
+
+    <h4>Résumé</h4>
+
+    <textarea
+      id="resumeLivre"
+      rows="8">${livre.resume || ""}
+    </textarea>
+
+    <button
+      class="success"
+      onclick="sauverResume(${livre.id})">
+      Enregistrer le résumé
+    </button>
+
+    <hr>
+
+    <h4>Commentaires du livre</h4>
+
+    ${
+      commentaires.length
+
+      ?
+
+      commentaires.map(c=>`
+      <div class="comment">
+        <strong>
+        ${c.auteur}
+        </strong>
+        <br>
+        ${c.texte}
+      </div>
+      `).join("")
+
+      :
+
+      "<p>Aucun commentaire.</p>"
+    }
+
+  `;
+
+}
+
+/* =========================
+   COMMENTAIRES
+========================= */
+
 function ajouterCommentaire(){
 
-const texte =
-document.getElementById("commentTexte")
-.value.trim();
+  const livreId =
+    Number(
+      document.getElementById(
+        "commentLivre"
+      ).value
+    );
 
-if(!texte) return;
+  const texte =
+    document.getElementById(
+      "commentTexte"
+    ).value.trim();
 
-const data=getData();
+  if(!livreId || !texte){
+    return;
+  }
 
-data.commentaires.push({
-livreId:Number(
-document.getElementById("commentLivre")
-.value
-),
-auteur:utilisateur() || "Anonyme",
-texte
-});
+  const data = getData();
 
-saveData(data);
+  data.commentaires.push({
 
-document.getElementById("commentTexte").value="";
+    livreId,
+    auteur:
+      utilisateur()
+      || "Anonyme",
 
-render();
+    texte
 
-}
+  });
 
-function exporter(){
+  saveData(data);
 
-const blob = new Blob(
-[
-localStorage.getItem(STORAGE_KEY)
-],
-{
-type:"application/json"
-}
-);
+  document.getElementById(
+    "commentTexte"
+  ).value="";
 
-const a =
-document.createElement("a");
-
-a.href =
-URL.createObjectURL(blob);
-
-a.download =
-"bibliotheque-classe.json";
-
-a.click();
+  render();
 
 }
 
-function importer(){
-
-const fichier =
-document.getElementById("importFile")
-.files[0];
-
-if(!fichier) return;
-
-const reader =
-new FileReader();
-
-reader.onload = e => {
-
-localStorage.setItem(
-STORAGE_KEY,
-e.target.result
-);
-
-render();
-
-};
-
-reader.readAsText(fichier);
-
-}
+/* =========================
+   FILTRES
+========================= */
 
 function reinitialiserFiltres(){
 
-document.getElementById("rechercheLivre").value="";
-document.getElementById("filtreDisponibilite").value="tous";
-document.getElementById("filtreGenre").value="tous";
+  document.getElementById(
+    "rechercheLivre"
+  ).value="";
 
-render();
+  document.getElementById(
+    "filtreDisponibilite"
+  ).value="tous";
+
+  document.getElementById(
+    "filtreGenre"
+  ).value="tous";
+
+  render();
 
 }
+
+/* =========================
+   AFFICHAGE
+========================= */
 
 function render(){
 
-const data = getData();
+  const data = getData();
 
-document.getElementById(
-"currentUser"
-).innerHTML =
-utilisateur()
-? `Connecté : <strong>${utilisateur()}</strong>`
-: "Non connecté";
+  document.getElementById(
+    "currentUser"
+  ).textContent =
+  utilisateur()
+  ?
+  "Connecté : " +
+  utilisateur()
+  :
+  "Non connecté";
 
-const recherche =
-(document.getElementById("rechercheLivre")?.value || "")
-.toLowerCase();
+  const recherche =
+    (
+      document.getElementById(
+        "rechercheLivre"
+      )?.value || ""
+    ).toLowerCase();
 
-const filtreDispo =
-document.getElementById("filtreDisponibilite")?.value || "tous";
+  const filtreGenre =
+    document.getElementById(
+      "filtreGenre"
+    )?.value || "tous";
 
-const filtreGenre =
-document.getElementById("filtreGenre")?.value || "tous";
+  const filtreDispo =
+    document.getElementById(
+      "filtreDisponibilite"
+    )?.value || "tous";
 
-const livresFiltres =
-data.livres.filter(l => {
+  const livresFiltres =
+    data.livres.filter(l=>{
 
-const matchRecherche =
-l.titre.toLowerCase().includes(recherche)
-||
-(l.auteur || "")
-.toLowerCase()
-.includes(recherche);
+      const matchRecherche =
 
-const matchDispo =
-filtreDispo === "tous"
-||
-(filtreDispo === "disponible" && l.disponible)
-||
-(filtreDispo === "emprunte" && !l.disponible);
+      l.titre
+      .toLowerCase()
+      .includes(recherche)
 
-const matchGenre =
-filtreGenre === "tous"
-||
-l.genre === filtreGenre;
+      ||
 
-return matchRecherche
-&& matchDispo
-&& matchGenre;
+      (l.auteur || "")
+      .toLowerCase()
+      .includes(recherche);
 
-});
+      const matchGenre =
 
-document.getElementById("compteurLivres")
-.textContent =
-`${livresFiltres.length} livre(s) sur ${data.livres.length}`;
+      filtreGenre==="tous"
+      ||
+      l.genre===filtreGenre;
 
-document.getElementById("livresTable")
-.innerHTML =
-livresFiltres.map(l => `
-<tr>
-<td>${l.titre}</td>
-<td>${l.auteur}</td>
-<td>${l.illustrateur}</td>
-<td>${l.genre}</td>
-<td>
-<span class="badge">
-${l.disponible ? "Disponible" : "Emprunté"}
-</span>
-</td>
-<td>
+      const matchDispo =
 
-<button
-class="primary"
-onclick="selectionnerLivre(${l.id})">
-Ouvrir
-</button>
+      filtreDispo==="tous"
+      ||
 
-${l.disponible
-? `<button
-class="success"
-onclick="emprunter(${l.id})">
-Emprunter
-</button>`
-: `<button
-class="danger"
-onclick="retourner(${l.id})">
-Retour
-</button>`
-}
+      (
+        filtreDispo==="disponible"
+        &&
+        l.disponible
+      )
 
-<button
-onclick="modifierLivre(${l.id})">
-✏️
-</button>
+      ||
 
-<button
-class="danger"
-onclick="supprimerLivre(${l.id})">
-🗑️
-</button>
+      (
+        filtreDispo==="emprunte"
+        &&
+        !l.disponible
+      );
 
-</td>
-</tr>
-`).join("");
+      return (
+        matchRecherche
+        &&
+        matchGenre
+        &&
+        matchDispo
+      );
 
-document.getElementById("elevesListe")
-.innerHTML =
-data.eleves
-.map(e => `<li>${e.nom}</li>`)
-.join("");
+    });
 
-document.getElementById("commentLivre")
-.innerHTML =
-data.livres
-.map(l => `<option value="${l.id}">${l.titre}</option>`)
-.join("");
+  document.getElementById(
+    "livresTable"
+  ).innerHTML =
 
-document.getElementById("commentaires")
-.innerHTML =
-data.commentaires.map(c => {
+  livresFiltres.map(l=>`
 
-const livre =
-data.livres.find(
-l => l.id === c.livreId
-);
+  <tr>
 
-return `
-<div class="comment">
-<strong>${livre ? livre.titre : "Livre"}</strong><br>
-${c.auteur}<br>
-${c.texte}
-</div>
-`;
+    <td>${l.titre}</td>
 
-}).join("");
+    <td>${l.auteur}</td>
 
-document.getElementById("statLivres")
-.textContent =
-data.livres.length;
+    <td>${l.illustrateur || ""}</td>
 
-document.getElementById("statEmprunts")
-.textContent =
-data.emprunts.length;
+    <td>${l.genre}</td>
 
-document.getElementById("statDisponibles")
-.textContent =
-data.livres.filter(
-l => l.disponible
-).length;
+    <td>
+      ${
+        l.disponible
+        ? "Disponible"
+        : "Emprunté"
+      }
+    </td>
+
+    <td>
+
+      <button
+      class="primary"
+      onclick="selectionnerLivre(${l.id})">
+      Ouvrir
+      </button>
+
+      ${
+        l.disponible
+
+        ?
+
+        `<button
+        class="success"
+        onclick="emprunter(${l.id})">
+        Emprunter
+        </button>`
+
+        :
+
+        `<button
+        class="warning"
+        onclick="retourner(${l.id})">
+        Retour
+        </button>`
+      }
+
+      <button
+      onclick="modifierLivre(${l.id})">
+      ✏️
+      </button>
+
+      <button
+      class="danger"
+      onclick="supprimerLivre(${l.id})">
+      🗑️
+      </button>
+
+    </td>
+
+  </tr>
+
+  `).join("");
+
+  document.getElementById(
+    "elevesListe"
+  ).innerHTML =
+
+  data.eleves
+    .map(
+      e=>`<li>${e.nom}</li>`
+    )
+    .join("");
+
+  document.getElementById(
+    "eleveEmprunteur"
+  ).innerHTML =
+
+  data.eleves
+    .map(
+      e => `<option value="${e.nom}">
+      ${e.nom}
+      </option>`
+    )
+    .join("");
+
+  document.getElementById(
+    "commentLivre"
+  ).innerHTML =
+
+  data.livres
+    .map(
+      l => `<option value="${l.id}">
+      ${l.titre}
+      </option>`
+    )
+    .join("");
+
+  document.getElementById(
+    "listeEmprunts"
+  ).innerHTML =
+
+  data.emprunts.length
+
+  ?
+
+  data.emprunts.map(e=>{
+
+    const livre =
+      data.livres.find(
+      l=>l.id===e.livreId
+    );
+
+    return `
+
+    <div class="comment">
+
+      <strong>
+      ${livre?.titre || ""}
+      </strong>
+
+      <br>
+
+      Élève :
+      ${e.utilisateur}
+
+      <br>
+
+      Date :
+      ${e.dateEmprunt}
+
+    </div>
+
+    `;
+
+  }).join("")
+
+  :
+
+  "Aucun emprunt.";
+
+  document.getElementById(
+    "historiqueEmprunts"
+  ).innerHTML =
+
+  data.historique
+  .slice()
+  .reverse()
+  .map(h=>{
+
+    const livre =
+      data.livres.find(
+      l=>l.id===h.livreId
+    );
+
+    return `
+
+    <div class="comment">
+
+      <strong>
+      ${
+        h.action==="emprunt"
+        ? "📖 Emprunt"
+        : "📚 Retour"
+      }
+      </strong>
+
+      <br>
+
+      Livre :
+      ${livre?.titre || "Livre supprimé"}
+
+      <br>
+
+      Élève :
+      ${h.utilisateur}
+
+      <br>
+
+      Date :
+      ${h.date}
+
+    </div>
+
+    `;
+
+  }).join("");
+
+  document.getElementById(
+    "commentaires"
+  ).innerHTML =
+
+  data.commentaires
+  .map(c=>`
+
+    <div class="comment">
+
+      <strong>
+      ${c.auteur}
+      </strong>
+
+      <br>
+
+      ${c.texte}
+
+    </div>
+
+  `).join("");
+
+  document.getElementById(
+    "compteurLivres"
+  ).textContent =
+
+  `${livresFiltres.length}
+  livre(s) sur
+  ${data.livres.length}`;
+
+  document.getElementById(
+    "statLivres"
+  ).textContent =
+  data.livres.length;
+
+  document.getElementById(
+    "statEmprunts"
+  ).textContent =
+  data.emprunts.length;
+
+  document.getElementById(
+    "statDisponibles"
+  ).textContent =
+  data.livres.filter(
+    l=>l.disponible
+  ).length;
+
+  if(livreSelectionne){
+    afficherFicheLivre();
+  }
 
 }
 
 render();
 
-let deferredPrompt;
+/* =========================
+   PWA
+========================= */
 
-window.addEventListener(
-"beforeinstallprompt",
-e=>{
+if(
+  "serviceWorker"
+  in navigator
+){
 
-e.preventDefault();
+  window.addEventListener(
+    "load",
+    ()=>{
 
-deferredPrompt=e;
+      navigator
+      .serviceWorker
+      .register(
+        "./service-worker.js"
+      );
 
-document.getElementById("installBtn")
-.style.display="inline-block";
-
-});
-
-document.getElementById("installBtn")
-.addEventListener("click", async ()=>{
-
-if(!deferredPrompt) return;
-
-deferredPrompt.prompt();
-
-await deferredPrompt.userChoice;
-
-deferredPrompt = null;
-
-});
-
-if("serviceWorker" in navigator){
-
-window.addEventListener("load",()=>{
-
-navigator.serviceWorker.register(
-"./service-worker.js"
-);
-
-});
+    }
+  );
 
 }
 
 </script>
+
+</div>
 
 </body>
 </html>
