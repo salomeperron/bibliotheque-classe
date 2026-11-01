@@ -406,11 +406,13 @@ document.getElementById("livreGenre")
 const data = getData();
 
 data.livres.push({
-id:Date.now(),
-titre,
-auteur,
-genre,
-disponible:true
+    id: Date.now(),
+    titre,
+    auteur,
+    genre,
+    resume: "",
+    note: 0,
+    disponible: true
 });
 
 saveData(data);
@@ -495,6 +497,164 @@ render();
 
 }
 
+function supprimerLivre(id){
+
+    if(!confirm(
+        "Supprimer ce livre ?"
+    )){
+        return;
+    }
+
+    const data = getData();
+
+    data.livres =
+        data.livres.filter(
+            l => l.id !== id
+        );
+
+    data.commentaires =
+        data.commentaires.filter(
+            c => c.livreId !== id
+        );
+
+    saveData(data);
+
+    render();
+}
+
+function modifierLivre(id){
+
+    const data = getData();
+
+    const livre =
+        data.livres.find(
+            l => l.id === id
+        );
+
+    const nouveauTitre =
+        prompt(
+            "Titre",
+            livre.titre
+        );
+
+    if(!nouveauTitre) return;
+
+    const nouvelAuteur =
+        prompt(
+            "Auteur",
+            livre.auteur
+        );
+
+    livre.titre = nouveauTitre;
+    livre.auteur = nouvelAuteur;
+    livre.illustrateur = nouvelIllustrateur;
+
+    saveData(data);
+
+    render();
+}
+
+<div class="card">
+
+<h2>📖 Fiche du livre</h2>
+
+<div id="ficheLivre">
+
+Sélectionnez un livre.
+
+</div>
+
+</div>
+let livreSelectionne = null;
+
+function selectionnerLivre(id){
+
+    livreSelectionne = id;
+
+    afficherFicheLivre();
+
+}
+function afficherFicheLivre(){
+
+    if(!livreSelectionne){
+        return;
+    }
+
+    const data = getData();
+
+    const livre =
+        data.livres.find(
+            l => l.id === livreSelectionne
+        );
+
+    const commentaires =
+        data.commentaires.filter(
+            c => c.livreId === livreSelectionne
+        );
+
+    document.getElementById(
+        "ficheLivre"
+    ).innerHTML = `
+
+        <h3>${livre.titre}</h3>
+
+        <p>
+        <strong>Auteur :</strong>
+        ${livre.auteur}
+        </p>
+
+        <p>
+        <strong>Genre :</strong>
+        ${livre.genre}
+        </p>
+
+        <p>
+        <strong>Résumé :</strong>
+        </p>
+
+        <textarea
+            id="resumeLivre"
+            rows="7"
+        >${livre.resume || ""}</textarea>
+
+        <button
+            class="success"
+            onclick="sauverResume(${livre.id})">
+            Enregistrer le résumé
+        </button>
+
+        <hr>
+
+        <h4>Commentaires</h4>
+
+        ${commentaires.map(c => `
+            <div class="comment">
+                <strong>${c.auteur}</strong><br>
+                ${c.texte}
+            </div>
+        `).join("")}
+
+    `;
+}
+function sauverResume(id){
+
+    const data = getData();
+
+    const livre =
+        data.livres.find(
+            l => l.id === id
+        );
+
+    livre.resume =
+        document.getElementById(
+            "resumeLivre"
+        ).value;
+
+    saveData(data);
+
+    afficherFicheLivre();
+
+}
 function ajouterCommentaire(){
 
 const texte =
@@ -641,6 +801,7 @@ livresFiltres.map(l => `
 <tr>
 <td>${l.titre}</td>
 <td>${l.auteur}</td>
+<td>${l.illustrateur}</td>
 <td>${l.genre}</td>
 <td>
 <span class="badge">
@@ -648,10 +809,37 @@ ${l.disponible ? "Disponible" : "Emprunté"}
 </span>
 </td>
 <td>
+
+<button
+class="primary"
+onclick="selectionnerLivre(${l.id})">
+Ouvrir
+</button>
+
 ${l.disponible
-? `<button class="primary" onclick="emprunter(${l.id})">Emprunter</button>`
-: `<button class="danger" onclick="retourner(${l.id})">Retour</button>`
+? `<button
+class="success"
+onclick="emprunter(${l.id})">
+Emprunter
+</button>`
+: `<button
+class="danger"
+onclick="retourner(${l.id})">
+Retour
+</button>`
 }
+
+<button
+onclick="modifierLivre(${l.id})">
+✏️
+</button>
+
+<button
+class="danger"
+onclick="supprimerLivre(${l.id})">
+🗑️
+</button>
+
 </td>
 </tr>
 `).join("");
