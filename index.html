@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#2563eb">
+manifest.json
+
+<title>Bibliothèque de classe</title>
+
+<style>
+
+:root{
+    --primary:#2563eb;
+    --success:#16a34a;
+    --danger:#dc2626;
+    --bg:#f5f7fb;
+    --card:#ffffff;
+}
+
+*{
+    box-sizing:border-box;
+    font-family:Segoe UI,Arial,sans-serif;
+}
+
+body{
+    margin:0;
+    background:var(--bg);
+}
+
+header{
+    background:var(--primary);
+    color:white;
+    padding:20px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+}
+
+.card{
+    background:white;
+    border-radius:12px;
+    padding:16px;
+    margin-bottom:20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.grid{
+    display:grid;
+    gap:20px;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+}
+
+input,select,textarea{
+    width:100%;
+    padding:10px;
+    margin-top:6px;
+    margin-bottom:10px;
+}
+
+button{
+    border:none;
+    border-radius:8px;
+    padding:10px 14px;
+    cursor:pointer;
+    font-weight:bold;
+    margin:2px;
+}
+
+.primary{
+    background:var(--primary);
+    color:white;
+}
+
+.success{
+    background:var(--success);
+    color:white;
+}
+
+.danger{
+    background:var(--danger);
+    color:white;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    padding:10px;
+    border-bottom:1px solid #ddd;
+}
+
+.badge{
+    background:#e5e7eb;
+    padding:4px 8px;
+    border-radius:20px;
+}
+
+.stat{
+    text-align:center;
+}
+
+.stat h1{
+    margin:0;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>📚 Bibliothèque de classe</h1>
+</header>
+
+<div class="container">
+
+<div class="grid">
+
+<div class="card stat">
+<h3>Total livres</h3>
+<h1 id="statLivres">0</h1>
+</div>
+
+<div class="card stat">
+<h3>Emprunts</h3>
+<h1 id="statEmprunts">0</h1>
+</div>
+
+<div class="card stat">
+<h3>Disponibles</h3>
+<h1 id="statDisponibles">0</h1>
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Utilisateur</h2>
+
+<input
+id="userName"
+placeholder="Nom de l'utilisateur">
+
+<button
+class="primary"
+onclick="connexion()">
+Connexion
+</button>
+
+<p id="currentUser"></p>
+
+<button
+id="installBtn"
+class="success"
+style="display:none">
+Installer l'application
+</button>
+
+</div>
+
+<div class="grid">
+
+<div class="card">
+
+<h2>Ajouter un livre</h2>
+
+<input
+id="livreTitre"
+placeholder="Titre">
+
+<input
+id="livreAuteur"
+placeholder="Auteur">
+
+<select id="livreGenre">
+<option>Roman</option>
+<option>BD</option>
+<option>Documentaire</option>
+<option>Magazine</option>
+<option>Conte</option>
+<option>Autre</option>
+</select>
+
+<button
+class="success"
+onclick="ajouterLivre()">
+Ajouter
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>Ajouter un élève</h2>
+
+<input
+id="eleveNom"
+placeholder="Nom">
+
+<button
+class="success"
+onclick="ajouterEleve()">
+Ajouter
+</button>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Recherche et filtres</h2>
+
+<input
+id="rechercheLivre"
+placeholder="Rechercher..."
+oninput="render()">
+
+<select
+id="filtreDisponibilite"
+onchange="render()">
+
+<option value="tous">Tous</option>
+<option value="disponible">Disponibles</option>
+<option value="emprunte">Empruntés</option>
+
+</select>
+
+<select
+id="filtreGenre"
+onchange="render()">
+
+<option value="tous">Tous les genres</option>
+<option value="Roman">Roman</option>
+<option value="BD">BD</option>
+<option value="Documentaire">Documentaire</option>
+<option value="Magazine">Magazine</option>
+<option value="Conte">Conte</option>
+<option value="Autre">Autre</option>
+
+</select>
+
+<button
+class="danger"
+onclick="reinitialiserFiltres()">
+✖ Réinitialiser
+</button>
+
+<p id="compteurLivres"></p>
+
+</div>
+
+<div class="card">
+
+<h2>Livres</h2>
+
+<table>
+
+<thead>
+<tr>
+<th>Titre</th>
+<th>Auteur</th>
+<th>Genre</th>
+<th>Statut</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="livresTable"></tbody>
+
+</table>
+
+</div>
+
+<div class="card">
+
+<h2>Élèves</h2>
+
+<ul id="elevesListe"></ul>
+
+</div>
+
+<div class="card">
+
+<h2>Commentaires</h2>
+
+<select id="commentLivre"></select>
+
+<textarea
+id="commentTexte"
+rows="4"></textarea>
+
+<button
+class="primary"
+onclick="ajouterCommentaire()">
+Ajouter
+</button>
+
+<div id="commentaires"></div>
+
+</div>
+
+<div class="card">
+
+<h2>Sauvegarde</h2>
+
+<button
+class="primary"
+onclick="exporter()">
+Exporter JSON
+</button>
+
+<input type="file" id="importFile">
+
+<button
+class="success"
+onclick="importer()">
+Importer JSON
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+const STORAGE_KEY="bibliotheque_classe";
+
+function getData(){
+
+return JSON.parse(
+localStorage.getItem(STORAGE_KEY)
+||
+JSON.stringify({
+livres:[],
+eleves:[],
+emprunts:[],
+commentaires:[]
+})
+);
+
+}
+
+function saveData(data){
+
+localStorage.setItem(
+STORAGE_KEY,
+JSON.stringify(data)
+);
+
+}
+
+function connexion(){
+
+const nom=
+document.getElementById("userName")
+.value.trim();
+
+if(!nom) return;
+
+localStorage.setItem(
+"user_actuel",
+nom
+);
+
+render();
+
+}
+
+function utilisateur(){
+
+return localStorage.getItem(
+"user_actuel"
+)||"";
+
+}
+
+function ajouterLivre(){
+
+const titre=
+document.getElementById("livreTitre").value.trim();
+
+if(!titre) return;
+
+const auteur=
+document.getElementById("livreAuteur").value;
+
+const genre=
+document.getElementById("livreGenre").value;
+
+const data=getData();
+
+data.livres.push({
+id:Date.now(),
+titre,
+auteur,
+genre,
+disponible:true
+});
+
+saveData(data);
+
+render();
+
+}
+
+function ajouterEleve(){
+
+const nom=
+document.getElementById("eleveNom")
+.value.trim();
+
+if(!nom) return;
+
+const data=getData();
+
+data.eleves.push({
+id:Date.now(),
+nom
+});
+
+saveData(data);
+
+render();
+
+}
+
+function emprunter(id){
+
+const data=getData();
+
+const livre=
+data.livres.find(
+l=>l.id===id
+);
+
+livre.disponible=false;
+
+data.emprunts.push({
+livreId:id,
+user:utilisateur()
+});
+
+saveData(data);
+
+render();
+
+}
+
+function retourner(id){
+
+const data=getData();
+
+const livre=
+data.livres.find(
+l=>l.id===id
+);
+
+livre.disponible=true;
+
+data.emprunts=
+data.emprunts.filter(
+e=>e.livreId!==id
+);
+
+saveData(data);
+
+render();
+
+}
+
+function ajouterCommentaire(){
+
+const data=getData();
+
+data.commentaires.push({
+
+livreId:Number(
+document.getElementById(
+"commentLivre"
+).value
+),
+
+auteur:utilisateur(),
+
+texte:document.getElementById(
+"commentTexte"
+).value
+
+});
+
+saveData(data);
+
+render();
+
+}
+
+function exporter(){
+
+const blob=
+new Blob(
+[
+localStorage.getItem(STORAGE_KEY)
+],
+{
+type:"application/json"
+}
+);
+
+const a=
+document.createElement("a");
+
+a.href=
+URL.createObjectURL(blob);
+
+a.download=
+"bibliotheque.json";
+
+a.click();
+
+}
+
+function importer(){
+
+const file=
+document.getElementById(
+"importFile"
+).files[0];
+
+if(!file) return;
+
+const reader=
+new FileReader();
+
+reader.onload=e=>{
+
+localStorage.setItem(
+STORAGE_KEY,
+e.target.result
+);
+
+render();
+
+};
+
+reader.readAsText(file);
+
+}
+
+function reinitialiserFiltres(){
+
+document.getElementById(
+"rechercheLivre"
+).value="";
+
+document.getElementById(
+"filtreDisponibilite"
+).value="tous";
+
+document.getElementById(
+"filtreGenre"
+).value="tous";
+
+render();
+
+}
+
+function render(){
+
+const data=getData();
+
+document.getElementById(
+"currentUser"
+).innerHTML=
+"Connecté : <strong>"
++utilisateur()+
+"</strong>";
+
+const recherche=
+(
+document.getElementById(
+"rechercheLivre"
+)?.value||""
+).toLowerCase();
+
+const dispo=
+document.getElementById(
+"filtreDisponibilite"
+)?.value||"tous";
+
+const genre=
+document.getElementById(
+"filtreGenre"
+)?.value||"tous";
+
+const livres=data.livres.filter(l=>{
+
+const matchRecherche=
+l.titre.toLowerCase()
+.includes(recherche)
+
+||
+
+(l.auteur||"")
+.toLowerCase()
+.includes(recherche);
+
+const matchDispo=
+dispo==="tous"
+||
+(
+dispo==="disponible"
+&&
+l.disponible
+)
+||
+(
+dispo==="emprunte"
+&&
+!l.disponible
+);
+
+const matchGenre=
+genre==="tous"
+||
+l.genre===genre;
+
+return (
+matchRecherche
+&&
+matchDispo
+&&
+matchGenre
+);
+
+});
+
+document.getElementById(
+"compteurLivres"
+).textContent=
+`${livres.length} livre(s) sur ${data.livres.length}`;
+
+const tbody=
+document.getElementById(
+"livresTable"
+);
+
+tbody.innerHTML="";
+
+livres.forEach(l=>{
+
+tbody.innerHTML+=`
+<tr>
+<td>${l.titre}</td>
+<td>${l.auteur}</td>
+<td>${l.genre}</td>
+<td>${
+l.disponible
+?
+"Disponible"
+:
+"Emprunté"
+}</td>
+<td>
+
+${l.disponible
+?
+`<button class="primary" onclick="emprunter(${l.id})">Emprunter</button>`
+:
+`<button class="danger" onclick="retourner(${l.id})">Retour</button>`
+}
+
+</td>
+</tr>
+`;
+
+});
+
+document.getElementById(
+"elevesListe"
+).innerHTML=
+data.eleves
+.map(e=>`<li>${e.nom}</li>`)
+.join("");
+
+document.getElementById(
+"statLivres"
+).textContent=
+data.livres.length;
+
+document.getElementById(
+"statEmprunts"
+).textContent=
+data.emprunts.length;
+
+document.getElementById(
+"statDisponibles"
+).textContent=
+data.livres.filter(
+l=>l.disponible
+).length;
+
+}
+
+render();
+
+let deferredPrompt;
+
+window.addEventListener(
+"beforeinstallprompt",
+e=>{
+
+e.preventDefault();
+
+deferredPrompt=e;
+
+document.getElementById(
+"installBtn"
+).style.display=
+"inline-block";
+
+});
+
+document.getElementById(
+"installBtn"
+).addEventListener(
+"click",
+async()=>{
+
+if(!deferredPrompt) return;
+
+deferredPrompt.prompt();
+
+await deferredPrompt.userChoice;
+
+deferredPrompt=null;
+
+});
+
+if("serviceWorker" in navigator){
+
+window.addEventListener(
+"load",
+()=>{
+
+navigator.serviceWorker
+.register(
+"./service-worker.js"
+);
+
+});
+
+}
+
+</script>
+
+</body>
+</html>
